@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/layFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_navigation_bar"/>
+
+        <ImageView
+            android:id="@+id/iv_main"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/bottom_navigation_bar"
+            android:background="#DDDCDC"/>
+
+        <com.ashokvarma.bottomnavigation.BottomNavigationBar
+            android:id="@+id/bottom_navigation_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</layout>
