@@ -21,7 +21,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_middle"
-                android:src="@mipmap/icon_moren_wode"
                 app:border_width="2dp"/>
         </RelativeLayout>
         <TextView

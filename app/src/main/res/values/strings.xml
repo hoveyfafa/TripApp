@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">TripApp</string>
+    <string name="app_name">旅游资讯</string>
+
+    <string name="text_cancel">取消</string>
+    <string name="str_wechat">微信</string>
+    <string name="str_timeline">朋友圈</string>
+    <string name="str_qq">QQ</string>
+    <string name="str_qzone">QQ空间</string>
+    <string name="str_weibo">微博</string>
+    <string name="str_qrcode">面对面</string>
 </resources>

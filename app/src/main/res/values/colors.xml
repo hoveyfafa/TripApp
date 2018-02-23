@@ -5,5 +5,12 @@
     <color name="colorAccent">#FF4081</color>
     <color name="baseColor">#92B8F4</color>
     <color name="line_gray">#e0e0e0</color>
+    <!-- 按钮不可点击颜色 -->
+    <color name="main_btn_can_not_press">#A6B4D6</color>
 
+    <!-- 按钮可点击颜色 -->
+    <color name="main_btn_can_press">#2e365b</color>
+
+    <!-- 按钮点击时颜色 -->
+    <color name="main_btn_on_press">#13161b</color>
 </resources>

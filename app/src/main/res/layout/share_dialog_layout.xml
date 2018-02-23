@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/share_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="46dp"
+        android:layout_marginRight="46dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#E2E2E2"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="分享到"
+            android:textColor="#7D7D7D"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#E2E2E2"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/share_title"
+        android:weightSum="3">
+
+
+        <LinearLayout
+            android:id="@+id/ll_share_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"/>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/share_btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/ll_main"
+        android:background="@drawable/main_rectangle_btn_bg"
+        android:text="@string/text_cancel"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+
+</RelativeLayout>
