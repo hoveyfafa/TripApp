@@ -22,6 +22,9 @@ import com.jiangjh.tripapp.R;
 public class ShareDiolog  extends Dialog {
     private static final int WECHAT = 1;
     private static final int TIMELINE = 2;
+    private static final int QQ = 3;
+    private static final int QQZONE = 4;
+    private static final int WEIBO = 5;
     private static final int QRCODE = 6;
 
     private Button mCloseBtn;
@@ -46,7 +49,7 @@ public class ShareDiolog  extends Dialog {
 
         setContentView(R.layout.share_dialog_layout);
         findViews();
-        intialItems();
+        initialItems();
         setListener();
     }
 
@@ -55,11 +58,12 @@ public class ShareDiolog  extends Dialog {
         mShareItemsLayout = (LinearLayout) findViewById(R.id.ll_share_items);
     }
 
-    private void intialItems() {
+    private void initialItems() {
         mShareItemsLayout.removeAllViews();
         createItem(WECHAT);
         createItem(TIMELINE);
-
+        createItem(QQ);
+        createItem(WEIBO);
         createItem(QRCODE);
     }
 
@@ -76,9 +80,21 @@ public class ShareDiolog  extends Dialog {
                 itemIcon.setImageResource(R.mipmap.icon_timeline_invitation);
                 itemName.setText(R.string.str_timeline);
                 break;
+            case QQ:
+                itemIcon.setImageResource(R.mipmap.icon_qq_invitation);
+                itemName.setText(R.string.str_qq);
+                break;
+            case QQZONE:
+                itemIcon.setImageResource(R.mipmap.icon_qzone);
+                itemName.setText(R.string.str_qzone);
+                break;
+
+            case WEIBO:
+                itemIcon.setImageResource(R.mipmap.icon_weibo_invitation);
+                itemName.setText(R.string.str_weibo);
+                break;
             case QRCODE:
                 itemIcon.setImageResource(R.mipmap.icon_qrcode_invitation);
-
                 itemName.setText(R.string.str_qrcode);
                 break;
             default:
@@ -87,8 +103,8 @@ public class ShareDiolog  extends Dialog {
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.rightMargin = (int) DisplayUtils.convertDp2Px(10);
-        layoutParams.leftMargin = (int) DisplayUtils.convertDp2Px(10);
+        layoutParams.rightMargin = 10;
+        layoutParams.leftMargin = 10;
         itemLayout.setLayoutParams(layoutParams);
         itemLayout.setTag(type);
         mShareItemsLayout.addView(itemLayout);
@@ -121,7 +137,7 @@ public class ShareDiolog  extends Dialog {
         super.onWindowFocusChanged(hasFocus);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(getWindow().getAttributes());
-        lp.width = DisplayUtils.getWidth();
+//        lp.width = DisplayUtils.getWidth();
         lp.gravity = Gravity.BOTTOM;
         onWindowAttributesChanged(lp);
     }

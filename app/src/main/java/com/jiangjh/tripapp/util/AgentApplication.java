@@ -3,7 +3,9 @@ package com.jiangjh.tripapp.util;
 import android.app.Application;
 
 /**
- * Created by JiaHao.Huang on 2018/2/22.
+ *
+ * @author JiaHao.Huang
+ * @date 2018/2/22
  */
 
 public class AgentApplication extends Application  {

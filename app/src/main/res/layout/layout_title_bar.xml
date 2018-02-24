@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/baseColor">
+
+    <TextView
+        android:id="@+id/title_bar_left_back_text"
+        style="@style/AppTheme.TitleBarLeft"
+        android:drawableLeft="@mipmap/icon_back_normal"
+        android:drawablePadding="5dp"
+        android:textColor="#F9F9F9"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/title_bar_left_image"
+        style="@style/AppTheme.TitleBarLeft"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/title_bar_text"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:textColor="#F9F9F9"
+        android:textSize="16sp"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/title_bar_right_image"
+        style="@style/AppTheme.TitleBarRight"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/title_bar_right_text"
+        style="@style/AppTheme.TitleBarRight"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:visibility="gone"/>
+</RelativeLayout>

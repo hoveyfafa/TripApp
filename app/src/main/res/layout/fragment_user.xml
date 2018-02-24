@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
+    <com.jiangjh.tripapp.widget.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleText="个人中心">
+    </com.jiangjh.tripapp.widget.TitleBar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,6 +27,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_middle"
+                android:src="@mipmap/icon_base_head"
                 app:border_width="2dp"/>
         </RelativeLayout>
         <TextView
@@ -29,7 +36,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="@dimen/margin_tiny1"
-            android:text="hovey"
+            android:text="用户"
             android:textColor="@color/white"
             android:textSize="@dimen/text_font_big"/>
 
@@ -42,16 +49,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <View
-                android:layout_marginTop="@dimen/margin_little"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_little"
+                android:layout_marginTop="@dimen/margin_little"
                 android:background="@color/line_gray"/>
 
             <RelativeLayout
                 android:id="@+id/rl_suggestion_mine"
-                android:layout_margin="@dimen/margin_tiny1"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_huge">
+                android:layout_height="@dimen/margin_huge"
+                android:layout_margin="@dimen/margin_tiny1">
                 <ImageView
                     android:id="@+id/iv_suggestion_mine"
                     android:layout_width="wrap_content"
@@ -61,8 +68,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_middle"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_middle"
                     android:layout_toRightOf="@+id/iv_suggestion_mine"
                     android:text="意见反馈"/>
                 <ImageView
@@ -74,16 +81,16 @@
             </RelativeLayout>
 
             <View
-                android:layout_marginLeft="@dimen/margin_little"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_little"
+                android:layout_marginLeft="@dimen/margin_little"
                 android:background="@color/line_gray"/>
 
             <RelativeLayout
                 android:id="@+id/rl_setting_mine"
-                android:layout_margin="@dimen/margin_tiny1"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_huge">
+                android:layout_height="@dimen/margin_huge"
+                android:layout_margin="@dimen/margin_tiny1">
                 <ImageView
                     android:id="@+id/iv_setting_mine"
                     android:layout_width="wrap_content"
@@ -93,8 +100,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_middle"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_middle"
                     android:layout_toRightOf="@+id/iv_setting_mine"
                     android:text="设置"/>
                 <ImageView

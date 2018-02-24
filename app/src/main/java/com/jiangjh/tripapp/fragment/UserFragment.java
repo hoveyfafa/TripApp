@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jiangjh.tripapp.R;
+import com.jiangjh.tripapp.widget.TitleBar;
 
 /**
  *
@@ -17,6 +18,9 @@ import com.jiangjh.tripapp.R;
  */
 
 public class UserFragment extends Fragment {
+
+    private TitleBar mTitleBar;
+    private View mView;
     public static UserFragment newInstance() {
         UserFragment fragment = new UserFragment();
         return fragment;
@@ -25,6 +29,18 @@ public class UserFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_user,null);
+        mView = inflater.inflate(R.layout.fragment_user,null);
+        findViews();
+        showTitleStyle();
+        return mView;
+    }
+
+    private void showTitleStyle(){
+        mTitleBar = mView.findViewById(R.id.title_bar);
+        mTitleBar.hiddenLeftText();
+
+    }
+    private void findViews(){
+
     }
 }
