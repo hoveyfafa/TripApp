@@ -20,6 +20,7 @@ import com.jiangjh.tripapp.R;
 
 /**
  * Created by Jinghao.Jiang.
+ * @author Jinghao.Jiang
  */
 
 public class CircleImageView extends android.support.v7.widget.AppCompatImageView {

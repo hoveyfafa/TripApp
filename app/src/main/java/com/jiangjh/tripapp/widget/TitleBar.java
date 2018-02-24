@@ -17,7 +17,9 @@ import android.widget.TextView;
 import com.jiangjh.tripapp.R;
 
 /**
- * Created by JiaHao.Huang on 2018/2/24.
+ *
+ * @author Jinghao.Jiang
+ * @date 2018/2/24
  */
 
 public class TitleBar extends RelativeLayout implements View.OnClickListener {
@@ -172,7 +174,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         mLeftDrawable = leftDrawable;
     }
 
-    public void setLeftDrawableEnable(boolean isEnable){
+    public void setLeftDrawableEnable(boolean isEnable) {
         mLeftButton.setEnabled(isEnable);
     }
 
@@ -194,7 +196,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         }
     }
 
-    public void setRightDrawableEnable(boolean isEnable){
+    public void setRightDrawableEnable(boolean isEnable) {
         mRightButton.setEnabled(isEnable);
     }
 
@@ -210,12 +212,12 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         }
     }
 
-    public void setRightTextEnable(boolean isEnable){
+    public void setRightTextEnable(boolean isEnable) {
         mRightText.setEnabled(isEnable);
     }
 
     @Override
-    public void setBackgroundResource(int resId){
+    public void setBackgroundResource(int resId) {
         if (getChildAt(0) != null) {
             getChildAt(0).setBackgroundResource(resId);
         }
@@ -251,30 +253,37 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
     }
 
     private TitleBarLeftImageClickListener mLiftImageClickListener;
+
     public void setLiftImageClickListener(TitleBarLeftImageClickListener listener) {
         this.mLiftImageClickListener = listener;
     }
+
     public interface TitleBarLeftImageClickListener {
         void onClickListener();
     }
 
     private TitleBarRightImageClickListener mRightImageClickListener;
+
     public void setRightImageClickListener(TitleBarRightImageClickListener listener) {
         this.mRightImageClickListener = listener;
     }
+
     public interface TitleBarRightImageClickListener {
         void onClickListener();
     }
 
     private TitleBarRightTextClickListener mRightTextClickListener;
+
     public void setRightTextClickListener(TitleBarRightTextClickListener listener) {
         this.mRightTextClickListener = listener;
     }
+
     public interface TitleBarRightTextClickListener {
         void onClickListener();
     }
 
     private TitleBarLeftTextClickListener mLeftTextClickListener;
+
     public void setLiftTextClickListener(TitleBarLeftTextClickListener listener) {
         this.mLeftTextClickListener = listener;
     }

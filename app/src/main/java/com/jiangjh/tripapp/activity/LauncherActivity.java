@@ -1,16 +1,15 @@
 package com.jiangjh.tripapp.activity;
 
-import android.support.v4.app.Fragment;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.support.v4.app.FragmentPagerAdapter;
 
 import com.jiangjh.tripapp.R;
 import com.jiangjh.tripapp.fragment.LauncherFragment1;
@@ -21,7 +20,7 @@ import com.jiangjh.tripapp.fragment.LauncherFragment4;
 import me.relex.circleindicator.CircleIndicator;
 
 /**
- * @author JiaHao.Huang
+ * @author Jinghao.Jiang
  * @date 2018/2/20
  */
 

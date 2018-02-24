@@ -2,7 +2,7 @@ package com.jiangjh.tripapp.request;
 
 /**
  *
- * @author JiaHao.Huang
+ * @author Jinghao.Jiang
  * @date 2018/2/22
  * 网络请求接口存放
  */

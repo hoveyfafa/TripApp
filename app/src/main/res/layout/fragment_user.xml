@@ -64,6 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/margin_large"
                     android:layout_centerVertical="true"
+                    android:src="@mipmap/icon_suggesstion"
                     android:layout_marginLeft="@dimen/margin_big"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -96,6 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/margin_large"
                     android:layout_centerVertical="true"
+                    android:src="@mipmap/icon_setting"
                     android:layout_marginLeft="@dimen/margin_big"/>
                 <TextView
                     android:layout_width="wrap_content"

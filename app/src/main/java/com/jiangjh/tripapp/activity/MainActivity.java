@@ -49,14 +49,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         bottomNavigationBar.setBarBackgroundColor("#F5F5F6");
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
         bottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
-            bottomNavigationBar.setActiveColor("#567FD3");
-            bottomNavigationBar.setInActiveColor("#525252");
-            bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.icon_home_selected, "首页")
-                    .setInactiveIconResource(R.mipmap.icon_home_unselected));
-            bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.icon_promotion_selected, "目的地")
-                    .setInactiveIconResource(R.mipmap.icon_promotion_unselected));
-            bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.icon_mine_selected, "我的")
-                    .setInactiveIconResource(R.mipmap.icon_mine_unselected));
+        bottomNavigationBar.setActiveColor("#567FD3");
+        bottomNavigationBar.setInActiveColor("#525252");
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.icon_home_press, "首页")
+                .setInactiveIconResource(R.mipmap.icon_home_unpress));
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.icon_destination_press, "目的地")
+                .setInactiveIconResource(R.mipmap.icon_destination_unpress));
+        bottomNavigationBar.addItem(new BottomNavigationItem(R.mipmap.icon_mine_press, "我的")
+                .setInactiveIconResource(R.mipmap.icon_mine_unpress));
 
 //        }
         bottomNavigationBar.initialise();

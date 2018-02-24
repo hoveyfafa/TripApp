@@ -16,10 +16,12 @@ import android.widget.TextView;
 import com.jiangjh.tripapp.R;
 
 /**
- * Created by JiaHao.Huang on 2018/2/22.
+ *
+ * @author Jinghao.Jiang
+ * @date 2018/2/22
  */
 
-public class ShareDiolog  extends Dialog {
+public class ShareDialog extends Dialog {
     private static final int WECHAT = 1;
     private static final int TIMELINE = 2;
     private static final int QQ = 3;
@@ -31,11 +33,11 @@ public class ShareDiolog  extends Dialog {
     private LinearLayout mShareItemsLayout;
     private Context mContext;
 
-    public ShareDiolog(Context context) {
+    public ShareDialog(Context context) {
         this(context, R.style.base_dialog_theme);
     }
 
-    public ShareDiolog(Context context, int themeResId) {
+    public ShareDialog(Context context, int themeResId) {
         super(context, themeResId);
         mContext = context;
 
@@ -129,7 +131,6 @@ public class ShareDiolog  extends Dialog {
         super.show();
 
     }
-
 
 
     @Override

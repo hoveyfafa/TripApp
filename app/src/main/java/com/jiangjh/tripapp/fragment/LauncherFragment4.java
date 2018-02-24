@@ -13,7 +13,7 @@ import com.jiangjh.tripapp.R;
 import com.jiangjh.tripapp.activity.MainActivity;
 
 /**
- * Created by JiaHao.Huang on 2018/2/20.
+ * Created by Jinghao.Jiang on 2018/2/20.
  */
 
 public class LauncherFragment4 extends Fragment {
@@ -21,7 +21,7 @@ public class LauncherFragment4 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.launcher_fragment4_layout,null);
+        return inflater.inflate(R.layout.launcher_fragment4_layout, null);
     }
 
     @Override

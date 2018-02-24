@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,27 +17,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by JiaHao.Huang on 2018/2/24.
+ * Created by Jinghao.Jiang on 2018/2/24.
  */
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Holder> {
     private List<NewsListBean> mList;
     private Context mContext;
     private OnNewsItemClickListener mOnNewsItemClickListener;
-    public NewsAdapter(List<NewsListBean> list,Context context){
+
+    public NewsAdapter(List<NewsListBean> list, Context context) {
         this.setListData(list);
         this.mContext = context;
     }
-    public void setOnNewsItemClickListener(OnNewsItemClickListener onNewsItemClickListener){
+
+    public void setOnNewsItemClickListener(OnNewsItemClickListener onNewsItemClickListener) {
         this.mOnNewsItemClickListener = onNewsItemClickListener;
     }
-    public void setListData(List<NewsListBean> list){
-        if (mList != null){
+
+    public void setListData(List<NewsListBean> list) {
+        if (mList != null) {
             mList.clear();
         } else {
             mList = new ArrayList<>();
         }
-        if (list != null){
+        if (list != null) {
             mList.addAll(list);
         }
 
@@ -47,7 +49,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Holder> {
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_news_item,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_news_item, parent, false);
         return new Holder(view);
     }
 
@@ -82,10 +84,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Holder> {
     }
 
 
-    class Holder extends RecyclerView.ViewHolder{
-        TextView mTitle,mDescription,mTime;
+    class Holder extends RecyclerView.ViewHolder {
+        TextView mTitle, mDescription, mTime;
         ImageView mShowImg;
         View mView;
+
         Holder(View itemView) {
             super(itemView);
             mTitle = itemView.findViewById(R.id.tv_title_news_item);
@@ -96,7 +99,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Holder> {
         }
     }
 
-    public interface OnNewsItemClickListener{
+    public interface OnNewsItemClickListener {
 
         void onItem(NewsListBean info);
     }

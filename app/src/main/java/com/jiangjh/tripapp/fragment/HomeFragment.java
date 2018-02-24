@@ -16,23 +16,12 @@ import android.widget.Toast;
 
 import com.jiangjh.tripapp.R;
 import com.jiangjh.tripapp.adapter.NewsAdapter;
-import com.jiangjh.tripapp.bean.NewsBean;
-import com.jiangjh.tripapp.bean.NewsListBean;
 import com.jiangjh.tripapp.iview.IHomeView;
 import com.jiangjh.tripapp.presenter.HomePresenter;
-import com.jiangjh.tripapp.request.RequestUrl;
-import com.jiangjh.tripapp.util.HttpUtil;
-import com.jiangjh.tripapp.util.Utility;
 import com.jiangjh.tripapp.widget.TitleBar;
 
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
-
 /**
- * @author JiaHao.Huang
+ * @author Jinghao.Jiang
  * @date 2018/2/20
  */
 
@@ -40,7 +29,7 @@ public class HomeFragment extends Fragment implements IHomeView {
     private View mView;
     private TitleBar titleBar;
     private RecyclerView mRecyclerView;
-        private HomePresenter mPresenter;
+    private HomePresenter mPresenter;
     private Context mContext;
     private SwipeRefreshLayout swipeRefresh;
     private NewsAdapter mAdapter;
@@ -60,7 +49,7 @@ public class HomeFragment extends Fragment implements IHomeView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_home, null);
-        mPresenter = new HomePresenter(this,mContext);
+        mPresenter = new HomePresenter(this, mContext);
         showTitleStyle();
         findViews();
         mPresenter.getTripNews();

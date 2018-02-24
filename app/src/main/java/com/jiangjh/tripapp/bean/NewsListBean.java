@@ -3,10 +3,10 @@ package com.jiangjh.tripapp.bean;
 import java.io.Serializable;
 
 /**
- * Created by JiaHao.Huang on 2018/2/22.
+ * Created by Jinghao.Jiang on 2018/2/22.
  */
 
-public class NewsListBean implements Serializable{
+public class NewsListBean implements Serializable {
 
     private String ctime;
 

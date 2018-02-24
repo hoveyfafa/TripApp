@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.jiangjh.tripapp.R;
 
 /**
- * Created by JiaHao.Huang on 2018/2/20.
+ * Created by Jinghao.Jiangg on 2018/2/20.
  */
 
 public class LauncherFragment2 extends Fragment {
@@ -18,6 +18,6 @@ public class LauncherFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.launcher_fragment2_layout,null);
+        return inflater.inflate(R.layout.launcher_fragment2_layout, null);
     }
 }

@@ -7,7 +7,9 @@ import com.bumptech.glide.Glide;
 import com.jiangjh.tripapp.R;
 
 /**
- * Created by JiaHao.Huang on 2018/2/24.
+ *
+ * @author Jinghao.Jiang
+ * @date 2018/2/24
  */
 
 public class Misc {

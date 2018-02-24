@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by JiaHao.Huang on 2018/2/22.
+ * Created by Jinghao.Jiang on 2018/2/22.
  */
 
-public class NewsBean implements Serializable{
+public class NewsBean implements Serializable {
 
     private int code;
 

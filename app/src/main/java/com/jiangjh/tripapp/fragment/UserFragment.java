@@ -12,8 +12,7 @@ import com.jiangjh.tripapp.R;
 import com.jiangjh.tripapp.widget.TitleBar;
 
 /**
- *
- * @author JiaHao.Huang
+ * @author Jinghao.Jiang
  * @date 2018/2/20
  */
 
@@ -21,6 +20,7 @@ public class UserFragment extends Fragment {
 
     private TitleBar mTitleBar;
     private View mView;
+
     public static UserFragment newInstance() {
         UserFragment fragment = new UserFragment();
         return fragment;
@@ -29,18 +29,19 @@ public class UserFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_user,null);
+        mView = inflater.inflate(R.layout.fragment_user, null);
         findViews();
         showTitleStyle();
         return mView;
     }
 
-    private void showTitleStyle(){
+    private void showTitleStyle() {
         mTitleBar = mView.findViewById(R.id.title_bar);
         mTitleBar.hiddenLeftText();
 
     }
-    private void findViews(){
+
+    private void findViews() {
 
     }
 }

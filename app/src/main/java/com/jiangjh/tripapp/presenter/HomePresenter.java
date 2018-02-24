@@ -19,8 +19,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 /**
- *
- * @author JiaHao.Huang
+ * @author Jinghao.Jiang
  * @date 2018/2/22
  */
 
@@ -29,6 +28,7 @@ public class HomePresenter {
     private IHomeView mView;
     private Context mContext;
     private NewsAdapter mAdapter;
+
     public HomePresenter(IHomeView view, Context context) {
         this.mView = view;
         this.mContext = context;
@@ -38,15 +38,15 @@ public class HomePresenter {
         HttpUtil.sendOkHttpRequest(RequestUrl.IP, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                        mView.getNewsFail();
+                mView.getNewsFail();
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
                 final NewsBean newsBean = Utility.parseJsonWithGson(responseText);
-                if (200 == newsBean.getCode() && newsBean.getNewslist() !=null){
-                    if (mAdapter == null ) {
+                if (200 == newsBean.getCode() && newsBean.getNewslist() != null) {
+                    if (mAdapter == null) {
                         mAdapter = new NewsAdapter(newsBean.getNewslist(), mContext);
                     }
                     mAdapter.setListData(newsBean.getNewslist());
@@ -54,12 +54,12 @@ public class HomePresenter {
                         @Override
                         public void onItem(NewsListBean info) {
                             Intent intent = new Intent(mContext, WebActivity.class);
-                            intent.putExtra("webUrl",info.getUrl());
+                            intent.putExtra("webUrl", info.getUrl());
                             mContext.startActivity(intent);
                         }
                     });
                     mView.getNewsSuccess(mAdapter);
-                }else {
+                } else {
                     mView.getNewsFail();
                 }
             }
