@@ -1,6 +1,12 @@
 package com.jiangjh.tripapp.request;
 
+import com.example.xiaoping.okhttputil.OkHttpUtils;
+import com.example.xiaoping.okhttputil.builder.OkHttpRequestBuilder;
+import com.example.xiaoping.okhttputil.builder.PostFormBuilder;
+import com.example.xiaoping.okhttputil.callback.StringCallback;
+import com.example.xiaoping.okhttputil.request.RequestCall;
 import com.jiangjh.tripapp.util.AgentApplication;
+import com.jiangjh.tripapp.util.MD5Utils;
 import com.jiangjh.tripapp.util.Utils;
 
 import java.io.File;

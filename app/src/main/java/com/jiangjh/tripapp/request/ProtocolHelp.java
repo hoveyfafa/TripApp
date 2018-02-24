@@ -4,6 +4,10 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.jiangjh.tripapp.util.AgentApplication;
+import com.jiangjh.tripapp.util.JsonUtils;
+import com.jiangjh.tripapp.util.LoadingDialog;
+
 import org.json.JSONObject;
 
 import java.util.Map;
@@ -86,7 +90,7 @@ public class ProtocolHelp {
         ProtocolManager.getInstance().request(param, url, new ProtocolManager.ReponseCallback() {
             @Override
             public void fail(String e) {
-                Toast.makeText(MyApplication.getInstance(), e, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AgentApplication.getInstance(), e, Toast.LENGTH_SHORT).show();
                 if (httpCallBack != null) {
                     httpCallBack.fail(e);
                 }
