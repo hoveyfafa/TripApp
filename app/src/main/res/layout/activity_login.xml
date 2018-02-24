@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/ll_login_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:id="@+id/tv_phone_label_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="手机号"
+                android:textColor="#5C5C5C"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:id="@+id/iv_line_login"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="14dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="14dp"
+                android:layout_toRightOf="@id/tv_phone_label_login"
+                android:background="#EDEDEDr"/>
+
+            <com.carme.caruser.widget.ClearEditText
+                android:id="@+id/edt_phone_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/btn_security_login"
+                android:layout_toRightOf="@id/iv_line_login"
+                android:background="@null"
+                android:hint="@string/str_please_input_phone"
+                android:inputType="number"
+                android:maxLength="11"
+                android:textColor="#5C5C5C"
+                android:textColorHint="@color/color_CBCBD0"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/btn_security_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/security_button_bg"
+                android:gravity="center"
+                android:text="验证码"
+                android:textColor="@color/security_code_text_color"
+                android:textSize="12sp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="#EDEDEDr"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:id="@+id/tv_security_label_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="验证码"
+                android:textColor="#5C5C5C"
+                android:textSize="16sp"/>
+
+            <com.carme.caruser.widget.ClearEditText
+                android:id="@+id/edt_security_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_26"
+                android:layout_marginRight="20dp"
+                android:layout_toRightOf="@id/tv_security_label_login"
+                android:background="@null"
+                android:hint="@string/str_please_input_security_code"
+                android:inputType="number"
+                android:maxLength="6"
+                android:textColor="#5C5C5C"
+                android:textColorHint="@color/color_CBCBD0"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="#EDEDEDr"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_voice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dp_6"
+                android:text="收不到验证码？试试"
+                android:textColor="@color/color_33"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_voice_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_6"
+                android:paddingTop="@dimen/dp_6"
+                android:text="语音验证"
+                android:textColor="@color/color_f99901"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_30"
+            android:background="@drawable/main_btn_selector"
+            android:enabled="false"
+            android:text="@string/login"
+            android:textColor="@drawable/main_btn_text_selector"
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cbx_agreement_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@drawable/btn_check"
+                android:checked="true"
+                android:paddingLeft="@dimen/dp_4"
+                android:text="@string/str_read_and_agree"
+                android:textColor="@color/color_33"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_agreement_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_agreement"
+                android:textColor="@color/color_567FD3"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
