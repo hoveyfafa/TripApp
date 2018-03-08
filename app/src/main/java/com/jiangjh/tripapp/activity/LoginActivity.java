@@ -1,17 +1,23 @@
 package com.jiangjh.tripapp.activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jiangjh.tripapp.R;
-import com.jiangjh.tripapp.util.CheckCode;
+import com.jiangjh.tripapp.database.MyDBOpenhelper;
 import com.jiangjh.tripapp.widget.ClearEditText;
 import com.jiangjh.tripapp.widget.TitleBar;
 
@@ -22,26 +28,27 @@ import com.jiangjh.tripapp.widget.TitleBar;
  */
 
 public class LoginActivity extends AppCompatActivity{
-    private Button btnLogin, btnSecurity;
-    private ClearEditText edtPhone, edtSecurity;
-    private CheckBox cbxAgreement;
+    private Button btnLogin;
+    private ClearEditText edtName, edtSecurity;
     private TitleBar mTitleBar;
+    private MyDBOpenhelper mMyDBOpenhelper;
+    private TextView mTvSign;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
         initListener();
+        mMyDBOpenhelper = new MyDBOpenhelper(this,"jjh.db",null,1);
+
     }
 
     private void initView(){
         mTitleBar = (TitleBar) findViewById(R.id.title_bar);
         btnLogin = (Button) findViewById(R.id.btn_login);
-        btnSecurity = (Button) findViewById(R.id.btn_security_login);
-        edtPhone = (ClearEditText) findViewById(R.id.edt_phone_login);
+        edtName = (ClearEditText) findViewById(R.id.edt_name_login);
         edtSecurity = (ClearEditText) findViewById(R.id.edt_security_login);
-        cbxAgreement = (CheckBox) findViewById(R.id.cbx_agreement_login);
-
+        mTvSign = findViewById(R.id.tv_sing);
         mTitleBar.setLeftDrawable(getResources().getDrawable(R.mipmap.icon_close));
     }
 
@@ -55,36 +62,27 @@ public class LoginActivity extends AppCompatActivity{
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                if (find(edtName.getText().toString().trim(),edtSecurity.getText().toString().trim())){
+                    Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_LONG).show();
+                    SharedPreferences sharedPreferences = getSharedPreferences("account",0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("name",edtName.getText().toString().trim());
+                    editor.apply();
+                    finish();
+                }else {
+                    Toast.makeText(LoginActivity.this,"登录失败",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
-        btnSecurity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnSecurity.setEnabled(false);
-                new CountDownTimer(30000, 1000) {
-
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        String formatStr = getResources().getString(R.string.str_reget);
-                        long second = millisUntilFinished / 1000;
-                        btnSecurity.setText(String.format(formatStr, second));
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        btnSecurity.setEnabled(true);
-                        btnSecurity.setText("验证码");
-                    }
-                }.start();
-            }
-        });
-        edtPhone.addTextChangedListener(tw);
+        edtName.addTextChangedListener(tw);
         edtSecurity.addTextChangedListener(tw);
-        cbxAgreement.setOnClickListener(new View.OnClickListener() {
+
+        mTvSign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnLogin.setEnabled(cbxAgreement.isChecked() && edtPhone.length() == 11 && edtSecurity.length() == 4);
+                Intent intent = new Intent(LoginActivity.this,SignActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -102,13 +100,29 @@ public class LoginActivity extends AppCompatActivity{
 
         @Override
         public void afterTextChanged(Editable s) {
-            String phoneStr = edtPhone.getText().toString().trim();
+            String nameStr = edtName.getText().toString().trim();
             String codeStr = edtSecurity.getText().toString().trim();
-            if (CheckCode.checkPhone(phoneStr) && codeStr.length() == 4 && cbxAgreement.isChecked()) {
+            if (!TextUtils.isEmpty(nameStr)&& !TextUtils.isEmpty(codeStr)) {
                 btnLogin.setEnabled(true);
             } else {
                 btnLogin.setEnabled(false);
             }
         }
     };
+
+    public boolean find(String name,String password){
+        SQLiteDatabase database = mMyDBOpenhelper.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM account WHERE name = ?",
+                new String[]{name});
+        if (cursor.moveToFirst()){
+            String dbName = cursor.getString(cursor.getColumnIndex("name"));
+            String dbPwd = cursor.getString(cursor.getColumnIndex("password"));
+            if (name.equals(dbName) && dbPwd.equals(password)){
+                return true;
+            }
+        }
+        cursor.close();
+        return false;
+    }
+
 }

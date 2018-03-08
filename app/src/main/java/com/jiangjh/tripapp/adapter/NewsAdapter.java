@@ -44,7 +44,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Holder> {
             mList.addAll(list);
         }
 
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     @Override

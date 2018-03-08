@@ -76,14 +76,14 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     @Override
     public void getNewsFail() {
-        swipeRefresh.setRefreshing(false);
-        Toast.makeText(mContext, "获取新闻失败", Toast.LENGTH_SHORT).show();
+        uiHandler.sendEmptyMessage(1);
+
     }
 
     @Override
     public void getNewsSuccess(NewsAdapter newsAdapter) {
         mAdapter = newsAdapter;
-        swipeRefresh.setRefreshing(false);
+
         uiHandler.sendEmptyMessage(0);
 
     }
@@ -93,7 +93,13 @@ public class HomeFragment extends Fragment implements IHomeView {
         public boolean handleMessage(Message message) {
             switch (message.what) {
                 case 0:
+                    swipeRefresh.setRefreshing(false);
                     mRecyclerView.setAdapter(mAdapter);
+                    mAdapter.notifyDataSetChanged();
+                    break;
+                case 1:
+                    swipeRefresh.setRefreshing(false);
+                    Toast.makeText(mContext, "获取新闻失败", Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;
