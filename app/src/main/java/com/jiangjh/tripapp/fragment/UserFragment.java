@@ -1,5 +1,8 @@
 package com.jiangjh.tripapp.fragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -62,8 +65,31 @@ public class UserFragment extends Fragment {
         mCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+                if (isLogin()){
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                     final AlertDialog dialog = new AlertDialog.Builder(getContext())
+                            .setMessage("退出登录?")
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            })
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("account",0);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.remove("name");
+                                    editor.apply();
+                                    getAccountName();
+                                }
+                            }).create();
+                     dialog.show();
+                }
+
             }
         });
 
@@ -85,7 +111,13 @@ public class UserFragment extends Fragment {
 
     private void getAccountName(){
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("account",0);
-        String name = sharedPreferences.getString("name","默认用户");
+        String name = sharedPreferences.getString("name","点击登录");
         mAccount.setText(name);
+    }
+
+    private boolean isLogin(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("account",0);
+        String name = sharedPreferences.getString("name","点击登录");
+        return "点击登录".equals(name);
     }
 }
