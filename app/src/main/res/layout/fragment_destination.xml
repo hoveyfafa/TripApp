@@ -13,6 +13,7 @@
     </com.jiangjh.tripapp.widget.TitleBar>
 
     <RelativeLayout
+        android:id="@+id/rl_destination_one"
         android:layout_width="match_parent"
         android:layout_height="150dp">
         <ImageView
@@ -30,6 +31,7 @@
 
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/rl_destination_two"
         android:layout_width="match_parent"
         android:layout_height="150dp">
         <ImageView
@@ -46,6 +48,7 @@
             android:textSize="30sp"/>
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/rl_destination_three"
         android:layout_width="match_parent"
         android:layout_height="150dp">
         <ImageView

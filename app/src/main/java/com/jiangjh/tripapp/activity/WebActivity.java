@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
@@ -36,6 +37,7 @@ public class WebActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             url = intent.getStringExtra("webUrl");
+            Log.i("WebActivity", "onCreate: ----》"+url);
         }
         initView();
         initListener();
