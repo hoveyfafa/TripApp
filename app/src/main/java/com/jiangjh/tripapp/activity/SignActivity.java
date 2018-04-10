@@ -1,5 +1,6 @@
 package com.jiangjh.tripapp.activity;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +18,6 @@ import com.jiangjh.tripapp.widget.ClearEditText;
 import com.jiangjh.tripapp.widget.TitleBar;
 
 /**
- *
  * @author JiaHao.Huang
  * @date 2018/3/8
  */
@@ -27,25 +27,26 @@ public class SignActivity extends AppCompatActivity {
     private Button signBtn;
     private ClearEditText edtName, edtSecurity;
     private MyDBOpenhelper mMyDBOpenhelper;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
-        mMyDBOpenhelper = new MyDBOpenhelper(this,"jjh.db",null,1);
+        mMyDBOpenhelper = new MyDBOpenhelper(this, "jjh.db", null, 1);
         mTitleBar = (TitleBar) findViewById(R.id.title_bar);
         mTitleBar.setLeftDrawable(getResources().getDrawable(R.mipmap.icon_close));
         initView();
         initListener();
     }
 
-    private void initView(){
+    private void initView() {
         signBtn = findViewById(R.id.btn_sign);
         edtName = findViewById(R.id.edt_name_sign);
         edtSecurity = findViewById(R.id.edt_security_sign);
 
     }
 
-    private void initListener(){
+    private void initListener() {
         mTitleBar.setLiftImageClickListener(new TitleBar.TitleBarLeftImageClickListener() {
             @Override
             public void onClickListener() {
@@ -56,11 +57,13 @@ public class SignActivity extends AppCompatActivity {
         signBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                save(edtName.getText().toString().trim(),edtSecurity.getText().toString().trim());
-                Toast.makeText(SignActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
-                finish();
-
-
+                if (find(edtName.getText().toString().trim())) {
+                    Toast.makeText(SignActivity.this, "账号已存在", Toast.LENGTH_SHORT).show();
+                } else {
+                    save(edtName.getText().toString().trim(), edtSecurity.getText().toString().trim());
+                    Toast.makeText(SignActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         });
         edtName.addTextChangedListener(tw);
@@ -83,7 +86,7 @@ public class SignActivity extends AppCompatActivity {
         public void afterTextChanged(Editable s) {
             String nameStr = edtName.getText().toString().trim();
             String codeStr = edtSecurity.getText().toString().trim();
-            if (!TextUtils.isEmpty(nameStr)&& !TextUtils.isEmpty(codeStr)) {
+            if (!TextUtils.isEmpty(nameStr) && !TextUtils.isEmpty(codeStr)) {
                 signBtn.setEnabled(true);
             } else {
                 signBtn.setEnabled(false);
@@ -92,9 +95,23 @@ public class SignActivity extends AppCompatActivity {
     };
 
 
-    public void save(String name,String pwd){
+    private void save(String name, String pwd) {
         SQLiteDatabase database = mMyDBOpenhelper.getWritableDatabase();
         database.execSQL("INSERT INTO account(name,password) values(?,?)",
-                new String[]{name,pwd});
+                new String[]{name, pwd});
+    }
+
+    private boolean find(String name) {
+        SQLiteDatabase database = mMyDBOpenhelper.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM account WHERE name = ?",
+                new String[]{name});
+        if (cursor.moveToFirst()) {
+            String dbName = cursor.getString(cursor.getColumnIndex("name"));
+            if (name.equals(dbName)) {
+                return true;
+            }
+        }
+        cursor.close();
+        return false;
     }
 }
