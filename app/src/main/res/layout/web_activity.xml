@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.jiangjh.tripapp.widget.TitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <com.jiangjh.tripapp.widget.TitleBar
-            android:id="@+id/title_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.jiangjh.tripapp.widget.TitleBar>
-        <ProgressBar
-            android:id="@+id/web_progress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="1dip"
-            android:progressDrawable="@drawable/web_progress"
-            android:visibility="gone"
-        />
-        <WebView
-            android:id="@+id/webView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </WebView>
-    </LinearLayout>
-</layout>
+        android:layout_height="wrap_content">
+    </com.jiangjh.tripapp.widget.TitleBar>
+    <ProgressBar
+        android:id="@+id/web_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:progressDrawable="@drawable/web_progress"
+        android:visibility="gone"
+    />
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </WebView>
+</LinearLayout>

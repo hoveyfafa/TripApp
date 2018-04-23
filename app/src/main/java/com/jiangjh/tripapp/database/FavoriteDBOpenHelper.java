@@ -10,18 +10,18 @@ import android.database.sqlite.SQLiteOpenHelper;
  * @date 2018/3/8
  */
 
-public class MyDBOpenhelper extends SQLiteOpenHelper{
-    public MyDBOpenhelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+public class FavoriteDBOpenHelper extends SQLiteOpenHelper {
+    public FavoriteDBOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE account(_id INTEGER PRIMARY KEY AUTOINCREMENT,"+"name VARCHAR(10), password VARCHAR(10))");
+        sqLiteDatabase.execSQL("CREATE TABLE favorite(_id INTEGER PRIMARY KEY AUTOINCREMENT,"+"time TEXT, title TEXT,description TEXT,picurl TEXT,url TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("ALTER TABLE account ADD weather Varchar");
+        sqLiteDatabase.execSQL("ALTER TABLE favorite ADD weather Varchar");
     }
 }

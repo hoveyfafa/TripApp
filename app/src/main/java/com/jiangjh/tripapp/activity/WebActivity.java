@@ -14,6 +14,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.jiangjh.tripapp.R;
 import com.jiangjh.tripapp.databinding.WebActivityBinding;
@@ -26,18 +27,23 @@ import com.jiangjh.tripapp.widget.TitleBar;
  */
 
 public class WebActivity extends AppCompatActivity {
-    private WebActivityBinding mBinding;
     private String url;
     private ShareDialog mShareDialog;
-
+    private WebView mWebView;
+    private TitleBar mTitleBar;
+    private ProgressBar mProgressBar;
+    private boolean showFavorite = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.web_activity);
+        setContentView(R.layout.web_activity);
         Intent intent = getIntent();
         if (intent != null) {
             url = intent.getStringExtra("webUrl");
             Log.i("WebActivity", "onCreate: ----》"+url);
+            if (intent.hasExtra("news")){
+                showFavorite = true;
+            }
         }
         initView();
         initListener();
@@ -45,13 +51,16 @@ public class WebActivity extends AppCompatActivity {
 
     private void initView() {
         mShareDialog = new ShareDialog(WebActivity.this);
-        mBinding.titleBar.setRightDrawable(getResources().getDrawable(R.mipmap.icon_share));
-        mBinding.webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        mBinding.webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        mWebView = findViewById(R.id.webView);
+        mTitleBar = findViewById(R.id.title_bar);
+        mProgressBar = findViewById(R.id.web_progress);
+        mTitleBar.setRightDrawable(getResources().getDrawable(R.mipmap.icon_share));
+        mWebView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        mWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            mBinding.webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+            mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         }
-        WebSettings settings = mBinding.webView.getSettings();
+        WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             settings.setAllowFileAccessFromFileURLs(true);
@@ -75,12 +84,12 @@ public class WebActivity extends AppCompatActivity {
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
 
-        mBinding.webView.setWebChromeClient(new WebChromeClient() {
+        mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
                 if (!TextUtils.isEmpty(title)) {
-                    mBinding.titleBar.setTitle(title);
+                    mTitleBar.setTitle(title);
                 }
             }
 
@@ -98,15 +107,15 @@ public class WebActivity extends AppCompatActivity {
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
                 if (newProgress == 100) {
-                    mBinding.webProgress.setVisibility(View.GONE);
+                    mProgressBar.setVisibility(View.GONE);
                 } else {
-                    mBinding.webProgress.setVisibility(View.VISIBLE);
-                    mBinding.webProgress.setProgress(newProgress);
+                    mProgressBar.setVisibility(View.VISIBLE);
+                    mProgressBar.setProgress(newProgress);
                 }
 
             }
         });
-        mBinding.webView.setWebViewClient(new WebViewClient() {
+        mWebView.setWebViewClient(new WebViewClient() {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -115,14 +124,14 @@ public class WebActivity extends AppCompatActivity {
             }
         });
         if (!TextUtils.isEmpty(url)) {
-            mBinding.webView.loadUrl(url);
+            mWebView.loadUrl(url);
         }
 
 
     }
 
     private void initListener() {
-        mBinding.titleBar.setRightImageClickListener(new TitleBar.TitleBarRightImageClickListener() {
+        mTitleBar.setRightImageClickListener(new TitleBar.TitleBarRightImageClickListener() {
             @Override
             public void onClickListener() {
                 if (mShareDialog != null && !mShareDialog.isShowing()) {
@@ -130,7 +139,7 @@ public class WebActivity extends AppCompatActivity {
                 }
             }
         });
-        mBinding.titleBar.setLiftImageClickListener(new TitleBar.TitleBarLeftImageClickListener() {
+        mTitleBar.setLiftImageClickListener(new TitleBar.TitleBarLeftImageClickListener() {
             @Override
             public void onClickListener() {
                 finish();
