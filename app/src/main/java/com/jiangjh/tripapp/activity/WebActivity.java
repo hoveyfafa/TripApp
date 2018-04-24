@@ -1,7 +1,8 @@
 package com.jiangjh.tripapp.activity;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +18,8 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.jiangjh.tripapp.R;
-import com.jiangjh.tripapp.databinding.WebActivityBinding;
+import com.jiangjh.tripapp.bean.NewsListBean;
+import com.jiangjh.tripapp.database.FavoriteDBOpenHelper;
 import com.jiangjh.tripapp.util.ShareDialog;
 import com.jiangjh.tripapp.widget.TitleBar;
 
@@ -32,7 +34,9 @@ public class WebActivity extends AppCompatActivity {
     private WebView mWebView;
     private TitleBar mTitleBar;
     private ProgressBar mProgressBar;
-    private boolean showFavorite = false;
+    private boolean isFavorite = false;
+    private FavoriteDBOpenHelper mFavoriteDBOpenHelper;
+    private NewsListBean newsBean;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,15 +44,18 @@ public class WebActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             url = intent.getStringExtra("webUrl");
+            initView();
+            initListener();
             Log.i("WebActivity", "onCreate: ----》"+url);
             if (intent.hasExtra("news")){
-                showFavorite = true;
+                newsBean = (NewsListBean) intent.getSerializableExtra("news");
+                initFavorite();
             }
+        }else {
+            finish();
         }
-        initView();
-        initListener();
-    }
 
+    }
     private void initView() {
         mShareDialog = new ShareDialog(WebActivity.this);
         mWebView = findViewById(R.id.webView);
@@ -145,5 +152,59 @@ public class WebActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        mTitleBar.setRightSecondButtonClickListener(new TitleBar.TitleBarRightSecondListener() {
+            @Override
+            public void onClickListener() {
+                if (isFavorite){
+                    deleteFavorite();
+                    mTitleBar.setRightSecondButtonDrabable(getResources().getDrawable(R.mipmap.icon_favorite_unclick));
+                    isFavorite = false;
+                }else {
+                    addFavorite();
+                    mTitleBar.setRightSecondButtonDrabable(getResources().getDrawable(R.mipmap.icon_favorite_click));
+                    isFavorite = true;
+                }
+            }
+        });
+    }
+
+    private void initFavorite(){
+        mTitleBar.showRightSecondButton();
+        mFavoriteDBOpenHelper = new FavoriteDBOpenHelper(this, "jjh.db", null, 1);
+        if (searchFavorite()){
+            mTitleBar.setRightSecondButtonDrabable(getResources().getDrawable(R.mipmap.icon_favorite_click));
+            isFavorite = true;
+        }else {
+            mTitleBar.setRightSecondButtonDrabable(getResources().getDrawable(R.mipmap.icon_favorite_unclick));
+            isFavorite = false;
+        }
+
+    }
+
+    private boolean searchFavorite(){
+        SQLiteDatabase database = mFavoriteDBOpenHelper.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM favorite WHERE url = ?",
+                new String[]{url});
+        if (cursor.moveToFirst()) {
+            String dbUrl = cursor.getString(cursor.getColumnIndex("url"));
+            if (url.equals(dbUrl)) {
+                return true;
+            }
+        }
+        cursor.close();
+        return false;
+    }
+
+    private void deleteFavorite(){
+        SQLiteDatabase database = mFavoriteDBOpenHelper.getWritableDatabase();
+        database.execSQL("DELETE FROM favorite WHERE url = ?",new String[]{url});
+    }
+
+    private void addFavorite(){
+        SQLiteDatabase database = mFavoriteDBOpenHelper.getWritableDatabase();
+        database.execSQL("INSERT INTO favorite(time,title,description,picurl,url) values(?,?,?,?,?)",
+                new String[]{newsBean.getCtime(), newsBean.getTitle(),newsBean.getDescription(),newsBean.getPicUrl(),newsBean.getUrl()});
+
     }
 }

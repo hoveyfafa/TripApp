@@ -33,6 +33,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
     private CharSequence mTitleCharSequence;
     private Drawable mRightDrawable;
     private Drawable mLeftDrawable;
+    private Drawable mRightSecondDrawable;
     private CharSequence mRightCharSequence;
     private CharSequence mLeftCharSequence;
 
@@ -53,6 +54,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
             mTitleCharSequence = typedArray.getText(R.styleable.titleBar_titleText);
             mRightDrawable = typedArray.getDrawable(R.styleable.titleBar_rightDrawable);
             mLeftDrawable = typedArray.getDrawable(R.styleable.titleBar_leftDrawable);
+            mRightSecondDrawable = typedArray.getDrawable(R.styleable.titleBar_rightSecondDrable);
             mRightCharSequence = typedArray.getText(R.styleable.titleBar_rightText);
             mLeftCharSequence = typedArray.getText(R.styleable.titleBar_leftText);
             typedArray.recycle();
@@ -73,11 +75,11 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
     }
 
     private void findView() {
-        mLeftText = (TextView) findViewById(R.id.title_bar_left_back_text);
-        mTitle = (TextView) findViewById(R.id.title_bar_text);
-        mRightButton = (ImageView) findViewById(R.id.title_bar_right_image);
-        mLeftButton = (ImageView) findViewById(R.id.title_bar_left_image);
-        mRightText = (TextView) findViewById(R.id.title_bar_right_text);
+        mLeftText = findViewById(R.id.title_bar_left_back_text);
+        mTitle =  findViewById(R.id.title_bar_text);
+        mRightButton =  findViewById(R.id.title_bar_right_image);
+        mLeftButton =  findViewById(R.id.title_bar_left_image);
+        mRightText =  findViewById(R.id.title_bar_right_text);
         mRightSecondButton = findViewById(R.id.title_bar_second_right_image);
     }
 
@@ -93,6 +95,10 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
 
         if (mLeftDrawable != null) {
             setLeftDrawable(mLeftDrawable);
+        }
+
+        if (mRightSecondDrawable !=null){
+            setRightSecondButtonDrabable(mRightSecondDrawable);
         }
 
         if (!TextUtils.isEmpty(mRightCharSequence)) {
@@ -219,8 +225,8 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
     }
 
     public void showRightSecondButton(){
-        if (mRightSecondButton.getVisibility() != VISIBLE){
-            mRightSecondButton.setVisibility(VISIBLE);
+        if (mRightSecondButton.getVisibility() != View.VISIBLE){
+            mRightSecondButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -228,13 +234,15 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         if (mRightSecondButton.getVisibility() != View.VISIBLE) {
             mRightSecondButton.setVisibility(View.VISIBLE);
         }
-
-        if (mRightSecondButton.getVisibility() != View.GONE) {
-            mRightSecondButton.setVisibility(View.GONE);
-        }
-
         mRightSecondButton.setImageDrawable(rightSecondDrawable);
-        mLeftDrawable = rightSecondDrawable;
+        mRightSecondDrawable = rightSecondDrawable;
+    }
+
+    public void setRightSecondButtonEnable(boolean isEnable){
+        mRightSecondButton.setEnabled(isEnable);
+    }
+    public void setRightSecondButtonClickable(boolean isClickAble){
+        mRightSecondButton.setClickable(isClickAble);
     }
     @Override
     public void setBackgroundResource(int resId) {
@@ -321,7 +329,12 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
     }
 
     private TitleBarRightSecondListener mTitleBarRightSecondListener;
-    private interface TitleBarRightSecondListener {
+
+    public interface TitleBarRightSecondListener {
         void onClickListener();
     }
+    public void setRightSecondButtonClickListener(TitleBarRightSecondListener listener){
+        this.mTitleBarRightSecondListener = listener;
+    }
+
 }

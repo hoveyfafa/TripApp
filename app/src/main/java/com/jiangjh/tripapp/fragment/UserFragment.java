@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jiangjh.tripapp.R;
+import com.jiangjh.tripapp.activity.FavoriteActivity;
 import com.jiangjh.tripapp.activity.LoginActivity;
 import com.jiangjh.tripapp.activity.SuggestionActivity;
 import com.jiangjh.tripapp.widget.CircleImageView;
@@ -31,7 +32,7 @@ public class UserFragment extends Fragment {
     private TitleBar mTitleBar;
     private View mView;
     private CircleImageView mCircleImageView;
-    private RelativeLayout mSuggestionLayout;
+    private RelativeLayout mSuggestionLayout,mFavoriteLayout;
     private TextView mAccount;
     public static UserFragment newInstance() {
         UserFragment fragment = new UserFragment();
@@ -57,6 +58,7 @@ public class UserFragment extends Fragment {
     private void findViews() {
         mCircleImageView = mView.findViewById(R.id.circleImageView);
         mSuggestionLayout = mView.findViewById(R.id.rl_suggestion_mine);
+        mFavoriteLayout = mView.findViewById(R.id.rl_favorite_mine);
         mAccount = mView.findViewById(R.id.tv_mine_user_name);
         getAccountName();
     }
@@ -97,6 +99,14 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SuggestionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mFavoriteLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), FavoriteActivity.class);
                 startActivity(intent);
             }
         });

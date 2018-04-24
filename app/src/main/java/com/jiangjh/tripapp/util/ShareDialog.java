@@ -3,6 +3,7 @@ package com.jiangjh.tripapp.util;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jiangjh.tripapp.R;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
- *
  * @author Jinghao.Jiang
  * @date 2018/2/22
  */
@@ -124,6 +128,41 @@ public class ShareDialog extends Dialog {
         });
 
 
+        int childCount = mShareItemsLayout.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View view = mShareItemsLayout.getChildAt(i);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch ((int) v.getTag()) {
+                        case WECHAT:
+                            Toast.makeText(mContext, "分享到微信成功", Toast.LENGTH_SHORT).show();
+                            break;
+                        case TIMELINE:
+                            Toast.makeText(mContext, "分享到朋友圈成功", Toast.LENGTH_SHORT).show();
+                            break;
+                        case QQ:
+                            Toast.makeText(mContext, "分享到QQ成功", Toast.LENGTH_SHORT).show();
+                            break;
+                        case QQZONE:
+                            Toast.makeText(mContext, "分享到QQ空间成功", Toast.LENGTH_SHORT).show();
+                            break;
+                        case WEIBO:
+                            Toast.makeText(mContext, "分享到微博成功", Toast.LENGTH_SHORT).show();
+                            break;
+                        case QRCODE:
+                            Toast.makeText(mContext, "分享成二维码成功", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (isShowing()) {
+                        dismiss();
+                    }
+                }
+            });
+        }
     }
 
     @Override

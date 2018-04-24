@@ -55,6 +55,7 @@ public class HomePresenter {
                         public void onItem(NewsListBean info) {
                             Intent intent = new Intent(mContext, WebActivity.class);
                             intent.putExtra("webUrl", info.getUrl());
+                            intent.putExtra("news",info);
                             mContext.startActivity(intent);
                         }
                     });
