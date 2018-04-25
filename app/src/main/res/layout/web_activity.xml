@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,16 +7,43 @@
     <com.jiangjh.tripapp.widget.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
     <ProgressBar
         android:id="@+id/web_progress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="5dip"
         android:progressDrawable="@drawable/web_progress"
+        android:layout_below="@+id/title_bar"
         android:visibility="gone"/>
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/web_progress"/>
+    <LinearLayout
+        android:id="@+id/ll_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:weightSum="5"
+        android:background="@color/white"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/et_comment"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="请输入你的评论..."
+            android:maxLength="100"
+            android:background="@color/white"/>
+        <Button
+            android:id="@+id/comment_btn"
+            android:layout_width="match_parent"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="评论"/>
+    </LinearLayout>
+</RelativeLayout>

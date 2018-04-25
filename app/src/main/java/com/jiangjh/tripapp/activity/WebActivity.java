@@ -15,7 +15,11 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.jiangjh.tripapp.R;
 import com.jiangjh.tripapp.bean.NewsListBean;
@@ -37,6 +41,9 @@ public class WebActivity extends AppCompatActivity {
     private boolean isFavorite = false;
     private FavoriteDBOpenHelper mFavoriteDBOpenHelper;
     private NewsListBean newsBean;
+    private LinearLayout mLlComment;
+    private EditText mEditText;
+    private Button mButton;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +56,10 @@ public class WebActivity extends AppCompatActivity {
             Log.i("WebActivity", "onCreate: ----》"+url);
             if (intent.hasExtra("news")){
                 newsBean = (NewsListBean) intent.getSerializableExtra("news");
+                mLlComment.setVisibility(View.VISIBLE);
                 initFavorite();
+            }else {
+                mLlComment.setVisibility(View.GONE);
             }
         }else {
             finish();
@@ -61,6 +71,9 @@ public class WebActivity extends AppCompatActivity {
         mWebView = findViewById(R.id.webView);
         mTitleBar = findViewById(R.id.title_bar);
         mProgressBar = findViewById(R.id.web_progress);
+        mLlComment = findViewById(R.id.ll_comment);
+        mEditText = findViewById(R.id.et_comment);
+        mButton = findViewById(R.id.comment_btn);
         mTitleBar.setRightDrawable(getResources().getDrawable(R.mipmap.icon_share));
         mWebView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         mWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -164,6 +177,18 @@ public class WebActivity extends AppCompatActivity {
                     addFavorite();
                     mTitleBar.setRightSecondButtonDrabable(getResources().getDrawable(R.mipmap.icon_favorite_click));
                     isFavorite = true;
+                }
+            }
+        });
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TextUtils.isEmpty(mEditText.getText().toString().trim())){
+                    Toast.makeText(WebActivity.this,"输入不能为空",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(WebActivity.this,"发表评论成功",Toast.LENGTH_SHORT).show();
+                    mEditText.setText(null);
                 }
             }
         });
